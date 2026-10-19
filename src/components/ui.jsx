@@ -65,7 +65,15 @@ export function CountUp({ to, format = (n) => Math.round(n).toLocaleString("pt-B
 }
 
 // Botão que segue levemente o cursor.
-export function CTA({ children = "Quero garantir meu guia agora", href = CHECKOUT_URL, variant = "primary", className = "", ...props }) {
+export function CTA({
+  children = "Quero garantir meu guia agora",
+  href = CHECKOUT_URL,
+  variant = "primary",
+  className = "",
+  target = href && href.startsWith("http") ? "_blank" : undefined,
+  rel = href && href.startsWith("http") ? "noopener noreferrer" : undefined,
+  ...props
+}) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 220, damping: 16 });

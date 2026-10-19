@@ -72,24 +72,28 @@
           }
         }
 
-        function updateEduzzLinks() {
+        function isCheckoutLink(href) {
+          return href && (href.indexOf('amazon.com') !== -1 || href.indexOf('sun.eduzz.com') !== -1);
+        }
+
+        function updateCheckoutLinks() {
           if (!window.location.search) return;
           var links = document.querySelectorAll('a');
           links.forEach(function(item) {
-            if (item.href && item.href.indexOf('sun.eduzz.com') !== -1) {
+            if (isCheckoutLink(item.href)) {
               item.href = appendUtmsToUrl(item.href);
             }
           });
         }
 
         // 1. Atualiza nos eventos de carregamento
-        window.addEventListener('DOMContentLoaded', updateEduzzLinks);
-        window.addEventListener('load', updateEduzzLinks);
+        window.addEventListener('DOMContentLoaded', updateCheckoutLinks);
+        window.addEventListener('load', updateCheckoutLinks);
 
         // 2. Interceptor de clique (garante 100% mesmo com componentes dinâmicos do React)
         document.addEventListener('click', function(e) {
           var link = e.target.closest('a');
-          if (link && link.href && link.href.indexOf('sun.eduzz.com') !== -1) {
+          if (link && isCheckoutLink(link.href)) {
             link.href = appendUtmsToUrl(link.href);
           }
         }, true);
@@ -97,7 +101,7 @@
         // 3. Observa novas renderizações do React no DOM
         if (window.MutationObserver) {
           var observer = new MutationObserver(function() {
-            updateEduzzLinks();
+            updateCheckoutLinks();
           });
           observer.observe(document.documentElement, { childList: true, subtree: true });
         }
