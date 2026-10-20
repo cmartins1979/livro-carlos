@@ -325,7 +325,7 @@ export function Conteudo() {
           <Label>dentro do livro</Label>
           <Words as="h2" className="h2" text="O que você encontra no guia?" highlight={[5]} />
           <ul className="lista">
-            <Reveal as="li">Guia de Carreira em Logística em PDF, com mais de 70 páginas</Reveal>
+            <Reveal as="li">Guia de Carreira em Logística em PDF, com 115 páginas</Reveal>
             <Reveal as="li" delay={0.05}>
               <strong>Sessão 1:</strong> os 4 pilares do Método MPCT
             </Reveal>
